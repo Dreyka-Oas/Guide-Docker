@@ -1,0 +1,129 @@
+<html><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide d'Installation de Docker sur Debian</title>
+<link rel="stylesheet" href="style.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Roboto:wght@400;700&display=swap');
+</style></head>
+<body>
+    <div class="floating-docker" id="docker1"></div>
+    <div class="floating-docker" id="docker2"></div>
+    <div class="glow" id="glow1"></div>
+    <div class="glow" id="glow2"></div>
+
+    <header>
+        <div class="container">
+            <h1>Guide d'Installation de Docker sur Debian</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="step">
+            <h2>Étape 1 : Mise à jour du système</h2>
+            <p>Avant d'installer Docker, il est recommandé de mettre à jour le système pour s'assurer que tous les paquets sont à jour.</p>
+            <pre><code>apt-get update
+apt-get upgrade</code></pre>
+        </div>
+
+        <div class="step">
+            <h2>Étape 2 : Installation des paquets prérequis</h2>
+            <p>Docker nécessite certains paquets pour fonctionner correctement. Installez-les avec la commande suivante :</p>
+            <pre><code>apt install apt-transport-https ca-certificates curl software-properties-common</code></pre>
+        </div>
+
+        <div class="step">
+            <h2>Étape 3 : Ajouter la clé GPG officielle de Docker</h2>
+            <p>Ajoutez la clé GPG pour vérifier les paquets téléchargés depuis le dépôt Docker.</p>
+            <pre><code>mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg</code></pre>
+        </div>
+
+        <div class="step">
+            <h2>Étape 4 : Ajouter le dépôt Docker</h2>
+            <p>Ajoutez le dépôt Docker aux sources APT.</p>
+            <pre><code>echo \
+"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+$(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null</code></pre>
+        </div>
+
+        <div class="step">
+            <h2>Étape 5 : Mettre à jour les informations du dépôt</h2>
+            <p>Mettez à jour la liste des paquets avec les nouvelles informations du dépôt Docker.</p>
+            <pre><code>sudo apt-get update</code></pre>
+        </div>
+
+        <div class="step">
+            <h2>Étape 6 : Installation de Docker Engine, Docker CLI, et Docker Compose Plugin</h2>
+            <p>Installez Docker Engine, Docker CLI, et les plugins associés.</p>
+            <pre><code>apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code></pre>
+        </div>
+
+        <div class="step">
+            <h2>Étape 7 : Vérification de l'installation de Docker</h2>
+            <p>Vérifiez que Docker est installé correctement en exécutant la commande suivante :</p>
+            <pre><code>docker --version</code></pre>
+        </div>
+
+        <div class="step">
+            <h2>Étape 8 : Test de Docker avec hello-world</h2>
+            <p>Testez l'installation de Docker en exécutant l'image hello-world :</p>
+            <pre><code>usermod -aG docker $USER</code></pre>
+        </div>
+
+        <div class="step">
+            <h2>Étape 9 : Gestion de Docker au démarrage</h2>
+            <p>Docker est configuré pour démarrer automatiquement avec le système. Vous pouvez vérifier le statut du service Docker avec :</p>
+            <pre><code>systemctl status docker</code></pre>
+            <p>Pour activer ou désactiver le démarrage automatique de Docker au démarrage du système, utilisez :</p>
+            <pre><code>systemctl enable docker
+systemctl disable docker</code></pre>
+        </div>
+
+        <div class="step">
+            <h2>Commandes Docker supplémentaires</h2>
+            <pre><code>docker pull nginx
+docker images
+docker run -d -p 8080:80 nginx
+docker ps
+docker exec -it &lt;container_id&gt; uname -a
+docker stop &lt;container_id&gt;
+docker ps -a
+docker start &lt;container_id&gt;
+docker rm -f &lt;container_id&gt;
+docker rmi nginx
+docker images</code></pre>
+        </div>
+
+        <div class="step">
+            <h2>Création d'une image Docker personnalisée</h2>
+            <p>1. Créez un fichier nommé Dockerfile</p>
+            <pre><code>FROM debian:latest
+CMD echo "Hello World!"</code></pre>
+            <p>Construir l'image : docker build -t my-hello-world .</p>
+            
+            <p>2. Créer un fichier index.html:</p>
+            <pre><code>&lt;html&gt;&lt;body&gt;&lt;h1&gt;Welcome to my custom NGINX server!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</code></pre>
+            
+            <p>3. Dockerfile :</p>
+            <pre><code>FROM nginx:latest
+COPY index.html /usr/share/nginx/html/index.html</code></pre>
+            
+            <p>4. Construire et exécuter :</p>
+            <pre><code>docker build -t my-nginx .
+docker run -d -p 8080:80 my-nginx</code></pre>
+            
+            <p>5. Accédez à http://192.168.201.34:8080/</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const steps = document.querySelectorAll('.step');
+            steps.forEach((step, index) => {
+                step.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>

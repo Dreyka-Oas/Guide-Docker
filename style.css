@@ -1,0 +1,172 @@
+    :root {
+        --primary-color: #3498db;
+        --secondary-color: #2ecc71;
+        --background-color: #0d1117;
+        --text-color: #c9d1d9;
+        --code-bg-color: #1f2937;
+        --border-color: #30363d;
+    }
+    body {
+        font-family: 'Roboto', sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--background-color);
+        margin: 0;
+        padding: 0;
+        transition: background-color 0.3s ease;
+    }
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+        position: relative;
+        z-index: 1;
+    }
+    header {
+        background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+        color: #ffffff;
+        padding: 2rem 0;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        position: relative;
+        overflow: hidden;
+    }
+    header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(255,255,255,0.1) 10px,
+            rgba(255,255,255,0.1) 20px
+        );
+        animation: headerAnimation 20s linear infinite;
+    }
+    @keyframes headerAnimation {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(50%, 50%); }
+    }
+    h1 {
+        margin: 0;
+        font-size: 2.5em;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        position: relative;
+    }
+    .step {
+        background: rgba(31, 41, 55, 0.7);
+        margin-bottom: 30px;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border: 1px solid var(--border-color);
+    }
+    .step:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        border-color: var(--primary-color);
+    }
+    h2 {
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 10px;
+        font-size: 1.8em;
+        margin-top: 0;
+    }
+    code {
+        background-color: var(--code-bg-color);
+        color: #f1c40f;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: 'Fira Code', monospace;
+    }
+    pre {
+        background-color: var(--code-bg-color);
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+        color: #f1c40f;
+        box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    }
+    .note {
+        background-color: rgba(41, 128, 185, 0.3);
+        border-left: 5px solid var(--primary-color);
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 0 5px 5px 0;
+    }
+    .command-output {
+        background-color: rgba(44, 62, 80, 0.5);
+        border: 1px solid #34495e;
+        padding: 15px;
+        margin-top: 15px;
+        font-family: 'Fira Code', monospace;
+        white-space: pre-wrap;
+        border-radius: 5px;
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .step {
+        animation: fadeInUp 0.5s ease-out forwards;
+        opacity: 0;
+    }
+    .floating-docker {
+        position: fixed;
+        width: 100px;
+        height: 100px;
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cGF0aCBmaWxsPSIjMDk5Y2VjIiBkPSJNMTI0LjggODIuMWMtNS4zLTMuNS0xMi41LTMuOC0xOC43LTEuMi0uNS0zLjYtMS4zLTcuMS0yLjQtMTAuNS0zLjctMTEuOC0xMC4yLTIxLjktMTktMjkuNS04LjktNy43LTE5LjQtMTEuNy0zMC40LTExLjctMjMuMyAwLTQzLjUgMTYuMS01MC42IDM5LjItMi43IDguOC0zLjIgMTgtMS41IDI3LjEuNSAyLjggMS4yIDUuNSAyLjIgOC4yLTcuOCAzLjEtMTQuMyA5LjMtMTcuNiAxNy40LTMuOCA5LjMtMi44IDE5LjcgMi43IDI4LjEgNS41IDguNCAxNC44IDEzLjUgMjQuOCAxMy41aDg2LjFjMTUuMSAwIDI4LjYtOS42IDMzLjQtMjMuOCA0LjgtMTQuMyAxLjItMzAtOS0zOS43eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik04Ni41IDMyLjhjMi4xIDAgMy44IDEuNyAzLjggMy44cy0xLjcgMy44LTMuOCAzLjgtMy44LTEuNy0zLjgtMy44IDEuNy0zLjggMy44LTMuOHptMTMuMSAwYzIuMSAwIDMuOCAxLjcgMy44IDMuOHMtMS43IDMuOC0zLjggMy44LTMuOC0xLjctMy44LTMuOCAxLjctMy44IDMuOC0zLjh6bTEzIDBoMGMyLjEgMCAzLjggMS43IDMuOCAzLjhzLTEuNyAzLjgtMy44IDMuOC0zLjgtMS43LTMuOC0zLjggMS43LTMuOCAzLjgtMy44eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik00OS4xIDQ0LjRIMzUuOXYxMy4yaDEzLjJ2LTEzLjJ6bTE0LjcgMEg1MC42djEzLjJoMTMuMnYtMTMuMnptMTQuNyAwSDY1LjN2MTMuMmgxMy4ydi0xMy4yem0xNC43IDBoLTEzLjJ2MTMuMmgxMy4ydi0xMy4yeiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik00OS4xIDU5LjFIMzUuOXYxMy4yaDEzLjJWNTkuMXptMTQuNyAwSDUwLjZ2MTMuMmgxMy4yVjU5LjF6bTE0LjcgMEg2NS4zdjEzLjJoMTMuMlY1OS4xem0xNC43IDBoLTEzLjJ2MTMuMmgxMy4yVjU5LjF6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTQ5LjEgNzMuOEgzNS45VjgzaDEzLjJ2LTkuMnptMTQuNyAwSDUwLjZWODNoMTMuMnYtOS4yem0xNC43IDAgNjUuMyAxM3YtOS4yem0xNC43IDBoLTEzLjJWODNoMTMuMnYtOS4yeiIvPjwvc3ZnPg==');
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0.5;
+        z-index: 0;
+    }
+    #docker1 {
+        top: 20%;
+        left: 5%;
+        animation: float 15s ease-in-out infinite;
+    }
+    #docker2 {
+        top: 60%;
+        right: 5%;
+        animation: float 18s ease-in-out infinite reverse;
+    }
+    @keyframes float {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        25% { transform: translate(10px, 10px) rotate(5deg); }
+        50% { transform: translate(0, 20px) rotate(0deg); }
+        75% { transform: translate(-10px, 10px) rotate(-5deg); }
+        100% { transform: translate(0, 0) rotate(0deg); }
+    }
+    .glow {
+        position: fixed;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+    }
+    #glow1 {
+        top: 30%;
+        left: -100px;
+        background: radial-gradient(circle, rgba(52, 152, 219, 0.3) 0%, rgba(52, 152, 219, 0) 70%);
+        animation: pulse 8s infinite alternate;
+    }
+    #glow2 {
+        bottom: 20%;
+        right: -100px;
+        background: radial-gradient(circle, rgba(46, 204, 113, 0.3) 0%, rgba(46, 204, 113, 0) 70%);
+        animation: pulse 12s infinite alternate-reverse;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 0.5; }
+        50% { transform: scale(1.2); opacity: 0.8; }
+        100% { transform: scale(1); opacity: 0.5; }
+    }
