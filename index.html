@@ -1,129 +1,192 @@
-<html><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guide d'Installation de Docker sur Debian</title>
-<link rel="stylesheet" href="style.css">
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Roboto:wght@400;700&display=swap');
-</style></head>
-<body>
-    <div class="floating-docker" id="docker1"></div>
-    <div class="floating-docker" id="docker2"></div>
-    <div class="glow" id="glow1"></div>
-    <div class="glow" id="glow2"></div>
-
-    <header>
-        <div class="container">
-            <h1>Guide d'Installation de Docker sur Debian</h1>
-        </div>
-    </header>
-
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Guide Complet Docker sur Debian</title>
+    <link href="styles.css" rel="stylesheet">
+    </head>
+    <body class="light-mode">
     <div class="container">
+      <h1>Guide Complet Docker sur Debian</h1>
+      
+      <button class="theme-switch" onclick="toggleTheme()">Changer de thème</button>
+    
+      <div class="part">
+        <h2>Partie 1 : Installation de Docker sur Debian</h2>
+        
         <div class="step">
-            <h2>Étape 1 : Mise à jour du système</h2>
-            <p>Avant d'installer Docker, il est recommandé de mettre à jour le système pour s'assurer que tous les paquets sont à jour.</p>
-            <pre><code>apt-get update
-apt-get upgrade</code></pre>
+          <h3>Étape 1 : Mise à jour du système</h3>
+          <code>apt-get update
+    apt-get upgrade</code>
         </div>
-
+    
         <div class="step">
-            <h2>Étape 2 : Installation des paquets prérequis</h2>
-            <p>Docker nécessite certains paquets pour fonctionner correctement. Installez-les avec la commande suivante :</p>
-            <pre><code>apt install apt-transport-https ca-certificates curl software-properties-common</code></pre>
+          <h3>Étape 2 : Installation des paquets prérequis</h3>
+          <code>apt install apt-transport-https ca-certificates curl software-properties-common</code>
         </div>
-
+    
         <div class="step">
-            <h2>Étape 3 : Ajouter la clé GPG officielle de Docker</h2>
-            <p>Ajoutez la clé GPG pour vérifier les paquets téléchargés depuis le dépôt Docker.</p>
-            <pre><code>mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg</code></pre>
+          <h3>Étape 3 : Ajouter la clé GPG officielle de Docker</h3>
+          <code>mkdir -p /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg</code>
         </div>
-
+    
         <div class="step">
-            <h2>Étape 4 : Ajouter le dépôt Docker</h2>
-            <p>Ajoutez le dépôt Docker aux sources APT.</p>
-            <pre><code>echo \
-"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
-$(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null</code></pre>
+          <h3>Étape 4 : Ajouter le dépôt Docker</h3>
+          <code>echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+      https://download.docker.com/linux/debian \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null</code>
         </div>
-
+    
         <div class="step">
-            <h2>Étape 5 : Mettre à jour les informations du dépôt</h2>
-            <p>Mettez à jour la liste des paquets avec les nouvelles informations du dépôt Docker.</p>
-            <pre><code>sudo apt-get update</code></pre>
+          <h3>Étape 5 : Mettre à jour les informations du dépôt</h3>
+          <code>sudo apt-get update</code>
         </div>
-
+    
         <div class="step">
-            <h2>Étape 6 : Installation de Docker Engine, Docker CLI, et Docker Compose Plugin</h2>
-            <p>Installez Docker Engine, Docker CLI, et les plugins associés.</p>
-            <pre><code>apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code></pre>
+          <h3>Étape 6 : Installation de Docker Engine, Docker CLI, et Docker Compose Plugin</h3>
+          <code>apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code>
         </div>
-
+    
         <div class="step">
-            <h2>Étape 7 : Vérification de l'installation de Docker</h2>
-            <p>Vérifiez que Docker est installé correctement en exécutant la commande suivante :</p>
-            <pre><code>docker --version</code></pre>
+          <h3>Étape 7 : Vérification de l'installation de Docker</h3>
+          <code>docker --version</code>
         </div>
-
+    
         <div class="step">
-            <h2>Étape 8 : Test de Docker avec hello-world</h2>
-            <p>Testez l'installation de Docker en exécutant l'image hello-world :</p>
-            <pre><code>usermod -aG docker $USER</code></pre>
+          <h3>Étape 8 : Test de Docker avec hello-world</h3>
+          <code>usermod -aG docker $USER</code>
         </div>
-
+    
         <div class="step">
-            <h2>Étape 9 : Gestion de Docker au démarrage</h2>
-            <p>Docker est configuré pour démarrer automatiquement avec le système. Vous pouvez vérifier le statut du service Docker avec :</p>
-            <pre><code>systemctl status docker</code></pre>
-            <p>Pour activer ou désactiver le démarrage automatique de Docker au démarrage du système, utilisez :</p>
-            <pre><code>systemctl enable docker
-systemctl disable docker</code></pre>
+          <h3>Étape 9 : Gestion de Docker au démarrage</h3>
+          <code>systemctl status docker</code>
+          <p>Pour activer ou désactiver le démarrage automatique de Docker au démarrage du système, utilisez :</p>
+          <code>systemctl enable docker
+    systemctl disable docker</code>
         </div>
-
+      </div>
+    
+      <div class="part">
+        <h2>Partie 2 : Utilisation de base de Docker</h2>
+        
         <div class="step">
-            <h2>Commandes Docker supplémentaires</h2>
-            <pre><code>docker pull nginx
-docker images
-docker run -d -p 8080:80 nginx
-docker ps
-docker exec -it &lt;container_id&gt; uname -a
-docker stop &lt;container_id&gt;
-docker ps -a
-docker start &lt;container_id&gt;
-docker rm -f &lt;container_id&gt;
-docker rmi nginx
-docker images</code></pre>
+          <h3>1. Télécharger une image Docker</h3>
+          <code>docker pull nginx</code>
         </div>
-
+    
         <div class="step">
-            <h2>Création d'une image Docker personnalisée</h2>
-            <p>1. Créez un fichier nommé Dockerfile</p>
-            <pre><code>FROM debian:latest
-CMD echo "Hello World!"</code></pre>
-            <p>Construir l'image : docker build -t my-hello-world .</p>
-            
-            <p>2. Créer un fichier index.html:</p>
-            <pre><code>&lt;html&gt;&lt;body&gt;&lt;h1&gt;Welcome to my custom NGINX server!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</code></pre>
-            
-            <p>3. Dockerfile :</p>
-            <pre><code>FROM nginx:latest
-COPY index.html /usr/share/nginx/html/index.html</code></pre>
-            
-            <p>4. Construire et exécuter :</p>
-            <pre><code>docker build -t my-nginx .
-docker run -d -p 8080:80 my-nginx</code></pre>
-            
-            <p>5. Accédez à http://192.168.201.34:8080/</p>
+          <h3>2. Lister les images Docker</h3>
+          <code>docker images</code>
         </div>
+    
+        <div class="step">
+          <h3>3. Lancer un conteneur Docker</h3>
+          <code>docker run -d -p 8080:80 nginx</code>
+          <p>Accédez ensuite à <a href="http://192.168.201.35:8080/">http://192.168.201.35:8080/</a></p>
+        </div>
+    
+        <div class="step">
+          <h3>4. Lister les conteneurs en cours d'exécution</h3>
+          <code>docker ps</code>
+        </div>
+    
+        <div class="step">
+          <h3>5. Afficher les détails d'un conteneur</h3>
+          <code>docker ps</code>
+          <div class="output">CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                  NAMES
+    53d061841d15   nginx     "/docker-entrypoint.…"   3 minutes ago    Up 3 minutes    0.0.0.0:8080->80/tcp   angry_euler</div>
+        </div>
+    
+        <div class="step">
+          <h3>6. Exécuter une commande dans un conteneur</h3>
+          <code>docker exec -it 53d061841d15 uname -a</code>
+          <div class="output">Linux 53d061841d15 5.10.0-8-amd64 #1 SMP Debian 5.10.46-4 (2021-08-03) x86_64 GNU/Linux</div>
+        </div>
+    
+        <div class="step">
+          <h3>7. Arrêter un conteneur</h3>
+          <code>docker stop 53d061841d15</code>
+        </div>
+    
+        <div class="step">
+          <h3>8. Lister tous les conteneurs (y compris ceux arrêtés)</h3>
+          <code>docker ps -a</code>
+          <div class="output">CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                      PORTS     NAMES
+    53d061841d15   nginx     "/docker-entrypoint.…"   9 minutes ago    Exited (0) 22 seconds ago             angry_euler
+    b53d8e7fe26d   hello-world   "/hello"                 9 minutes ago    Exited (0) 9 minutes ago               wonderful_bose</div>
+        </div>
+    
+        <div class="step">
+          <h3>9. Redémarrer un conteneur arrêté</h3>
+          <code>docker start 53d061841d15</code>
+        </div>
+    
+        <div class="step">
+          <h3>10. Afficher les processus en cours d'exécution dans un conteneur</h3>
+          <code>docker top 53d061841d15</code>
+        </div>
+    
+        <div class="step">
+          <h3>11. Supprimer un conteneur</h3>
+          <code>docker rm -f 53d061841d15</code>
+        </div>
+    
+        <div class="step">
+          <h3>12. Lister à nouveau les conteneurs</h3>
+          <code>docker ps -a</code>
+        </div>
+    
+        <div class="step">
+          <h3>13. Supprimer une image Docker</h3>
+          <code>docker rmi nginx</code>
+        </div>
+    
+        <div class="step">
+          <h3>14. Lister à nouveau les images Docker</h3>
+          <code>docker images</code>
+        </div>
+      </div>
+    
+      <div class="part">
+        <h2>Partie 3 : Création d'une image Docker personnalisée</h2>
+        
+        <div class="step">
+          <h3>1. Créer un fichier Dockerfile</h3>
+          <p>Créez un fichier nommé Dockerfile avec le contenu suivant :</p>
+          <code>FROM debian:latest
+    CMD echo "Hello World!"</code>
+          <p>Construisez l'image avec la commande :</p>
+          <code>docker build -t my-hello-world .</code>
+        </div>
+    
+        <div class="step">
+          <h3>2. Créer un fichier index.html</h3>
+          <p>Créez un fichier index.html avec le contenu suivant :</p>
+          <code>&lt;html&gt;&lt;body&gt;&lt;h1&gt;Welcome to my custom NGINX server!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</code>
+        </div>
+    
+        <div class="step">
+          <h3>3. Créer un Dockerfile pour NGINX</h3>
+          <p>Créez un nouveau Dockerfile avec le contenu suivant :</p>
+          <code>FROM nginx:latest
+    COPY index.html /usr/share/nginx/html/index.html</code>
+        </div>
+    
+        <div class="step">
+          <h3>4. Construire l'image NGINX personnalisée</h3>
+          <code>docker build -t my-nginx .</code>
+        </div>
+    
+        <div class="step">
+          <h3>5. Lancer le conteneur NGINX personnalisé</h3>
+          <code>docker run -d -p 8080:80 my-nginx</code>
+        </div>
+    
+        <div class="step">
+          <h3>6. Accéder au serveur NGINX personnalisé</h3>
+          <p>Ouvrez votre navigateur et accédez à <a href="http://192.168.201.34:8080/">http://192.168.201.34:8080/</a></p>
+          <div class="output">Welcome to my custom NGINX server!</div>
+        </div>
+      </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const steps = document.querySelectorAll('.step');
-            steps.forEach((step, index) => {
-                step.style.animationDelay = `${index * 0.1}s`;
-            });
-        });
-    </script>
-</body>
-</html>
+    
+    <script src="script.js"></script>
+    </body></html>
